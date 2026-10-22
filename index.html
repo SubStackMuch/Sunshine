@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You Are My Sunshine 🌞</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fff4b8 0%, #ffd6e8 50%, #ffb6c1 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', 'Quicksand', system-ui, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Sun rays background */
+    .sun-backdrop {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 200vmax; height: 200vmax;
+      transform: translate(-50%, -50%);
+      background: repeating-conic-gradient(
+        from 0deg,
+        rgba(255, 215, 0, 0.08) 0deg 10deg,
+        transparent 10deg 20deg
+      );
+      animation: rotateSun 60s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes rotateSun { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    /* Floating suns & hearts */
+    .float-item {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 9s infinite linear;
+      z-index: 1;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(110vh) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    .stage {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 3rem 2.5rem;
+      border-radius: 60px;
+      box-shadow: 0 20px 50px rgba(255, 165, 0, 0.35), 0 0 0 8px rgba(255, 255, 255, 0.5);
+      max-width: 720px;
+      width: 90%;
+      animation: stagePop 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes stagePop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Spinning sun icon */
+    .big-sun {
+      font-size: 5rem;
+      display: inline-block;
+      animation: spinSun 8s linear infinite, pulseSun 2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 20px #ffd700);
+    }
+    @keyframes spinSun { to { transform: rotate(360deg); } }
+    @keyframes pulseSun {
+      0% { filter: drop-shadow(0 0 15px #ffd700); }
+      100% { filter: drop-shadow(0 0 40px #ffa500); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #e07b00;
+      text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255, 165, 0, 0.3);
+      margin: 0.5rem 0;
+      animation: glowText 2s infinite alternate;
+    }
+    @keyframes glowText {
+      0% { text-shadow: 2px 2px 0 #fff, 4px 4px 0 rgba(255, 165, 0, 0.3); }
+      100% { text-shadow: 2px 2px 0 #fff, 4px 4px 20px rgba(255, 140, 0, 0.8); }
+    }
+
+    .subtitle {
+      font-size: 1.6rem;
+      color: #d6457a;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Lyric lines that fade in one by one */
+    .lyrics {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin: 1.5rem 0;
+    }
+    .lyric-line {
+      font-size: 1.35rem;
+      color: #8a4b6b;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: lyricFadeIn 0.8s ease forwards;
+    }
+    .lyric-line:nth-child(1) { animation-delay: 0.5s; }
+    .lyric-line:nth-child(2) { animation-delay: 1.2s; }
+    .lyric-line:nth-child(3) { animation-delay: 1.9s; }
+    .lyric-line:nth-child(4) { animation-delay: 2.6s; }
+    .lyric-line:nth-child(5) { animation-delay: 3.3s; }
+    @keyframes lyricFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .lyric-line em {
+      color: #e07b00;
+      font-style: normal;
+      font-weight: 800;
+    }
+
+    /* Bouncing music notes */
+    .notes {
+      font-size: 2rem;
+      letter-spacing: 0.5rem;
+      margin: 1rem 0;
+    }
+    .notes span {
+      display: inline-block;
+      animation: noteBounce 1.2s infinite ease-in-out;
+    }
+    .notes span:nth-child(2) { animation-delay: 0.2s; }
+    .notes span:nth-child(3) { animation-delay: 0.4s; }
+    .notes span:nth-child(4) { animation-delay: 0.6s; }
+    .notes span:nth-child(5) { animation-delay: 0.8s; }
+    @keyframes noteBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .happy-bday {
+      margin-top: 1.5rem;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ff1493;
+      letter-spacing: 2px;
+      display: inline-block;
+      padding: 0.6rem 2rem;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #fff0f5, #ffd6e8);
+      border: 3px dashed #ff69b4;
+      animation: bdayPulse 1.8s infinite alternate;
+    }
+    @keyframes bdayPulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 105, 180, 0.5); }
+      100% { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 105, 180, 0.8); }
+    }
+
+    @media (max-width: 550px) {
+      .stage { padding: 2rem 1.2rem; border-radius: 40px; }
+      h1 { font-size: 2rem; }
+      .subtitle { font-size: 1.2rem; }
+      .lyric-line { font-size: 1rem; }
+      .big-sun { font-size: 3.5rem; }
+      .happy-bday { font-size: 1.4rem; padding: 0.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sun-backdrop"></div>
+
+  <div class="stage">
+    <div class="big-sun">☀️</div>
+    <h1>You Are My Sunshine</h1>
+    <div class="subtitle">my only sunshine 🌞</div>
+
+    <div class="lyrics">
+      <div class="lyric-line">You make me <em>happy</em> when skies are grey</div>
+      <div class="lyric-line">You'll never know dear, how much I love you</div>
+      <div class="lyric-line">Please don't take my sunshine away ☀️</div>
+      <div class="lyric-line">You are my sunshine, my only sunshine</div>
+      <div class="lyric-line">And today is <em>all about YOU</em> 💛</div>
+    </div>
+
+    <div class="notes">
+      <span>🎵</span><span>🎶</span><span>🎵</span><span>🎶</span><span>🎵</span>
+    </div>
+
+    <div class="happy-bday">🎂 Happy Birthday, Jess! 🎂</div>
+  </div>
+
+  <script>
+    (function() {
+      const items = ['☀️', '💛', '🌻', '✨', '💖', '🌞', '🌟', '💫'];
+      const body = document.body;
+      for (let i = 0; i < 22; i++) {
+        const el = document.createElement('div');
+        el.classList.add('float-item');
+        el.textContent = items[Math.floor(Math.random() * items.length)];
+        el.style.left = Math.random() * 100 + '%';
+        el.style.fontSize = (1.2 + Math.random() * 1.8) + 'rem';
+        const dur = 7 + Math.random() * 9;
+        el.style.animationDuration = dur + 's';
+        el.style.animationDelay = -(Math.random() * dur) + 's';
+        body.appendChild(el);
+      }
+    })();
+  </script>
+</body>
+</html>
